@@ -24,7 +24,7 @@ import com.wardrobe.planner.model.Categories;
 import com.wardrobe.planner.model.Colors;
 import com.wardrobe.planner.model.Items;
 import com.wardrobe.planner.model.Material;
-import com.wardrobe.planner.model.Occasion;
+import com.wardrobe.planner.model.Collection;
 
 @Configuration
 @ComponentScan("com.wardrobe.planner.*")
@@ -70,7 +70,7 @@ public class ApplicationContextConfig {
     public SessionFactory getSessionFactory(DataSource dataSource) {
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
-    	sessionBuilder.addAnnotatedClasses(Colors.class,Categories.class, Items.class, Occasion.class, Material.class);
+    	sessionBuilder.addAnnotatedClasses(Colors.class,Categories.class, Items.class, Collection.class, Material.class);
     	return sessionBuilder.buildSessionFactory();
     }
     

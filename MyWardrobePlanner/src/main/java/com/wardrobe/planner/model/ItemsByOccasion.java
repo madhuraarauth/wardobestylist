@@ -16,7 +16,7 @@ public class ItemsByOccasion {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "OCCASION_ID")
-	private Occasion occasion;
+	private Collection occasion;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ITEM_ID")
@@ -30,11 +30,11 @@ public class ItemsByOccasion {
 		this.id = id;
 	}
 
-	public Occasion getOccasion() {
+	public Collection getOccasion() {
 		return occasion;
 	}
 
-	public void setOccasion(Occasion occasion) {
+	public void setOccasion(Collection occasion) {
 		this.occasion = occasion;
 	}
 

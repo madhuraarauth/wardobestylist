@@ -1,12 +1,16 @@
 package com.wardrobe.planner.model;
 
-import java.sql.Blob;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -32,6 +36,14 @@ public class Items {
 	@JsonManagedReference
 	@JoinColumn(name = "CATEGORY_ID")
 	private Categories category;
+	
+	@ManyToMany(cascade= CascadeType.ALL)
+	@JoinTable(
+			name = "ITEMS_BY_COLLECTION", 
+			joinColumns = @JoinColumn(name = "ITEM_ID"), 
+			inverseJoinColumns = @JoinColumn(name = "COLLECTION_ID")
+	)
+	private Set<Collection> collections;
 
 	/*@ManyToMany
 	@JoinTable(name="MATERIAL")
@@ -63,6 +75,22 @@ public class Items {
 
 	public void setCategory(Categories category) {
 		this.category = category;
+	}
+
+	public String getItemDesc() {
+		return itemDesc;
+	}
+
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
+	}
+
+	public Set<Collection> getCollections() {
+		return collections;
+	}
+
+	public void setCollections(Set<Collection> collections) {
+		this.collections = collections;
 	}
 
 	/*public Blob getImage() {

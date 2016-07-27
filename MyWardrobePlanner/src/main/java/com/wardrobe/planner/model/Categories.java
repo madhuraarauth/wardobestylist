@@ -24,7 +24,7 @@ public class Categories {
 	@Column(name="CATEGORY_NAME")
 	private String categoryName;
 	
-	 @JsonBackReference
+	@JsonBackReference
 	@OneToMany(mappedBy = "category", cascade= CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<Items> items;
 	
