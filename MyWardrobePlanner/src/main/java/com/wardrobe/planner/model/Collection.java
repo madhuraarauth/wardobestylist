@@ -25,7 +25,7 @@ public class Collection {
 	private String collectionName;
 
 	@JsonBackReference
-	@ManyToMany(mappedBy = "collections")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "collections")
 	private Set<Items> items;
 	
 	

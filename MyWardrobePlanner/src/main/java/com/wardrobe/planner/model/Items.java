@@ -37,13 +37,30 @@ public class Items {
 	@JoinColumn(name = "CATEGORY_ID")
 	private Categories category;
 	
-	@ManyToMany(cascade= CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	@JoinTable(
 			name = "ITEMS_BY_COLLECTION", 
 			joinColumns = @JoinColumn(name = "ITEM_ID"), 
 			inverseJoinColumns = @JoinColumn(name = "COLLECTION_ID")
 	)
 	private Set<Collection> collections;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@JoinTable(
+			name = "ITEMS_BY_COLOR", 
+			joinColumns = @JoinColumn(name = "ITEM_ID"), 
+			inverseJoinColumns = @JoinColumn(name = "COLOR_ID")
+	)
+	private Set<Colors> colors;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@JoinTable(
+			name = "ITEMS_BY_MATERIAL", 
+			joinColumns = @JoinColumn(name = "ITEM_ID"), 
+			inverseJoinColumns = @JoinColumn(name = "MATERIAL_ID")
+	)
+	private Set<Material> materials;
+
 
 	/*@ManyToMany
 	@JoinTable(name="MATERIAL")
@@ -92,6 +109,24 @@ public class Items {
 	public void setCollections(Set<Collection> collections) {
 		this.collections = collections;
 	}
+
+	public Set<Colors> getColors() {
+		return colors;
+	}
+
+	public void setColors(Set<Colors> colors) {
+		this.colors = colors;
+	}
+
+	public Set<Material> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(Set<Material> materials) {
+		this.materials = materials;
+	}
+
+	
 
 	/*public Blob getImage() {
 		return image;
