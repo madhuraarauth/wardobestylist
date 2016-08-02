@@ -22,8 +22,6 @@ public class ColorDaoImpl implements ColorDao {
 
 	}
 
-
-
 	@Transactional
 	public List<Colors> getAllColors() {
 		@SuppressWarnings("unchecked")
@@ -32,14 +30,38 @@ public class ColorDaoImpl implements ColorDao {
 		return colorsList;
 	}
 
-	public Colors getColorByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public Colors getColorById(long colorId) {
+		Colors colors = (Colors) hibernateTemplate.get(Colors.class, colorId);
+		return colors;
+	}
+	public void updateColors(Colors colors) {
+		try {
+			hibernateTemplate.saveOrUpdate(colors);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+		}
 	}
 
-	public void addColor(Colors color) {
-		// TODO Auto-generated method stub
-
+	public Colors addColors(Colors colors) {
+		try {
+			hibernateTemplate.save(colors);
+			return colors;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+		}
 	}
 
+	public void deleteColor(long id) {
+		try {
+			hibernateTemplate.delete(getColorById(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
 }

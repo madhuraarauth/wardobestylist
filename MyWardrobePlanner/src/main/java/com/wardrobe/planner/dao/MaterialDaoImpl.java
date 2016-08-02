@@ -27,5 +27,40 @@ public class MaterialDaoImpl implements MaterialDao {
 		List<Material> materialList = (List<Material>) hibernateTemplate.find("from Material");
 		return materialList;
 	}
+	
+	@Transactional
+	public Material getMaterialById(long materialId) {
+		Material materials = (Material) hibernateTemplate.get(Material.class, materialId);
+		return materials;
+	}
+	public void updateMaterial(Material materials) {
+		try {
+			hibernateTemplate.saveOrUpdate(materials);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+	}
+
+	public Material addMaterial(Material materials) {
+		try {
+			hibernateTemplate.save(materials);
+			return materials;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+		}
+	}
+
+	public void deleteMaterial(long id) {
+		try {
+			hibernateTemplate.delete(getMaterialById(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
 
 }

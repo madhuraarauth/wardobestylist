@@ -7,6 +7,8 @@ import com.wardrobe.planner.model.Colors;
 public interface ColorDao {
 
 	List<Colors> getAllColors();
-	Colors getColorByName(String name);
-	void addColor(Colors color);
+	Colors getColorById(long colorsId);
+	void updateColors(Colors colors);
+	Colors addColors(Colors colors);
+	void deleteColor(long id);
 }

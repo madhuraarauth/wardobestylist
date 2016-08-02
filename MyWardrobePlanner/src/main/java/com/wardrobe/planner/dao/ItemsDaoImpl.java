@@ -28,5 +28,40 @@ public class ItemsDaoImpl implements ItemsDao {
 		List<Items> itemsList = (List<Items>) hibernateTemplate.find("from Items");
 		return itemsList;
 	}
+	
+	@Transactional
+	public Items getItemsById(long itemId) {
+		Items items = (Items) hibernateTemplate.get(Items.class, itemId);
+		return items;
+	}
+	public void updateItem(Items item) {
+		try {
+			hibernateTemplate.saveOrUpdate(item);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+	}
+
+	public Items addItem(Items item) {
+		try {
+			hibernateTemplate.save(item);
+			return item;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+		}
+	}
+
+	public void deleteItem(long id) {
+		try {
+			hibernateTemplate.delete(getItemsById(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
 
 }

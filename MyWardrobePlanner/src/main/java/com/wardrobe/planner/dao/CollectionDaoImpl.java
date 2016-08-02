@@ -28,5 +28,41 @@ public class CollectionDaoImpl implements CollectionDao {
 		List<Collection> collectionList = (List<Collection>) hibernateTemplate.find("from Collection");
 		return collectionList;
 	}
+	
+	@Transactional
+	public Collection getCollectionById(long collectionId) {
+		Collection collections = (Collection) hibernateTemplate.get(Collection.class, collectionId);
+		return collections;
+	}
+	public void updateCollection(Collection collections) {
+		try {
+			hibernateTemplate.saveOrUpdate(collections);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+	}
+
+	public Collection addCollection(Collection collections) {
+		try {
+			hibernateTemplate.save(collections);
+			return collections;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+		}
+	}
+
+	public void deleteCollection(long id) {
+		try {
+			hibernateTemplate.delete(getCollectionById(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
+
 
 }

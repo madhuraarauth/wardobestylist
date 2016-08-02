@@ -63,6 +63,4 @@ public class CategoriesDaoImpl implements CategoriesDao {
 		} finally {
 		}
 	}
-
-
 }
