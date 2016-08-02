@@ -16,10 +16,16 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.wardrobe.planner.dao.CategoriesDao;
+import com.wardrobe.planner.dao.CategoriesDaoImpl;
+import com.wardrobe.planner.dao.CollectionDao;
+import com.wardrobe.planner.dao.CollectionDaoImpl;
 import com.wardrobe.planner.dao.ColorDao;
 import com.wardrobe.planner.dao.ColorDaoImpl;
 import com.wardrobe.planner.dao.ItemsDao;
 import com.wardrobe.planner.dao.ItemsDaoImpl;
+import com.wardrobe.planner.dao.MaterialDao;
+import com.wardrobe.planner.dao.MaterialDaoImpl;
 import com.wardrobe.planner.model.Categories;
 import com.wardrobe.planner.model.Colors;
 import com.wardrobe.planner.model.Items;
@@ -96,6 +102,23 @@ public class ApplicationContextConfig {
     	return new ItemsDaoImpl(hibernateTemplate);
     }
     
+    @Autowired
+    @Bean(name = "collectionDao")
+    public CollectionDao getCollectionDao(HibernateTemplate hibernateTemplate) {
+    	return new CollectionDaoImpl(hibernateTemplate);
+    }
+    
+    @Autowired
+    @Bean(name = "categoriesDao")
+    public CategoriesDao getCategoriesDao(HibernateTemplate hibernateTemplate) {
+    	return new CategoriesDaoImpl(hibernateTemplate);
+    }
+    
+    @Autowired
+    @Bean(name = "materialDao")
+    public MaterialDao getMaterialDao(HibernateTemplate hibernateTemplate) {
+    	return new MaterialDaoImpl(hibernateTemplate);
+    }
     @Autowired
     @Bean(name = "hibernateTemplate")
     public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory){
