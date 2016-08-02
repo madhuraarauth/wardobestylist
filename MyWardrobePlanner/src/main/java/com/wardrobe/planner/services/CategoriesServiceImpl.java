@@ -21,4 +21,24 @@ public class CategoriesServiceImpl implements CategoriesService {
 		return categoriesDao.getAllCategories();
 	}
 
+
+	public Categories getCategoryById(long categoryId) {
+		return categoriesDao.getCategoryById(categoryId);
+	}
+
+
+	public void updateCategories(Categories categories) {
+		categoriesDao.updateCategories(categories);		
+	}
+
+
+	public Categories addCategories(Categories categories) {
+		return categoriesDao.addCategories(categories);
+	}
+
+
+	public void deleteCategories(long id) {
+		categoriesDao.deleteCategories(id);
+	}
+
 }

@@ -20,4 +20,20 @@ public class ItemsServiceImpl implements ItemsService {
 		return itemsDao.getAllItems();
 	}
 
+	public Items getItemsById(long itemId) {
+		return itemsDao.getItemsById(itemId);
+	}
+
+	public void updateItem(Items items) {
+		itemsDao.updateItem(items);
+	}
+
+	public Items addItem(Items items) {
+		return itemsDao.addItem(items);
+	}
+
+	public void deleteItem(long id) {
+		itemsDao.deleteItem(id);
+	}
+
 }

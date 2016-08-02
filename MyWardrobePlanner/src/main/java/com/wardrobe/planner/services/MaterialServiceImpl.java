@@ -20,4 +20,20 @@ public class MaterialServiceImpl implements MaterialService {
 		return materialDao.getAllMaterials();
 	}
 
+	public Material getMaterialById(long materialId) {
+		return materialDao.getMaterialById(materialId);
+	}
+
+	public void updateMaterial(Material materials) {
+		materialDao.updateMaterial(materials);
+	}
+
+	public Material addMaterial(Material materials) {
+		return materialDao.addMaterial(materials);
+	}
+
+	public void deleteMaterial(long id) {
+		materialDao.deleteMaterial(id);		
+	}
+
 }

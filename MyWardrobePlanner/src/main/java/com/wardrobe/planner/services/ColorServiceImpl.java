@@ -20,4 +20,20 @@ public class ColorServiceImpl implements ColorService {
 		return colorDao.getAllColors();
 	}
 
+	public Colors getColorById(long colorsId) {
+		return colorDao.getColorById(colorsId);
+	}
+
+	public void updateColors(Colors colors) {
+		colorDao.updateColors(colors);
+	}
+
+	public Colors addColors(Colors colors) {
+		return colorDao.addColors(colors);
+	}
+
+	public void deleteColor(long id) {
+		colorDao.deleteColor(id);		
+	}
+
 }
