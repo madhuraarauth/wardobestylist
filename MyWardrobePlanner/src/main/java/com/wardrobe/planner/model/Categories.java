@@ -29,6 +29,11 @@ public class Categories {
 	private Set<Items> items;
 	
 	
+	public Categories(long categoryId, String categoryName) {
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+	}
+	
 	public String getCategoryName() {
 		return categoryName;
 	}

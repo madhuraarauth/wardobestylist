@@ -119,6 +119,7 @@ public class ApplicationContextConfig {
     public MaterialDao getMaterialDao(HibernateTemplate hibernateTemplate) {
     	return new MaterialDaoImpl(hibernateTemplate);
     }
+    
     @Autowired
     @Bean(name = "hibernateTemplate")
     public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory){

@@ -29,4 +29,40 @@ public class CategoriesDaoImpl implements CategoriesDao {
 		return categoriesList;
 	}
 
+	@Transactional
+	public Categories getCategoryById(long categoryId) {
+		Categories categories = (Categories) hibernateTemplate.get(Categories.class, categoryId);
+		return categories;
+	}
+	public void updateCategories(Categories categories) {
+		try {
+			hibernateTemplate.saveOrUpdate(categories);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+	}
+
+	public Categories addCategories(Categories categories) {
+		try {
+			hibernateTemplate.save(categories);
+			return categories;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+		}
+	}
+
+	public void deleteCategories(long id) {
+		try {
+			hibernateTemplate.delete(getCategoryById(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
+
+
 }
