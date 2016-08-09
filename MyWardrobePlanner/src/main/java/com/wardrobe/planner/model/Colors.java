@@ -1,11 +1,13 @@
 package com.wardrobe.planner.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -17,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Colors {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "COLOR_ID")
 	private long colorId;
 	
@@ -29,7 +31,7 @@ public class Colors {
 	
 	@JsonBackReference
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "colors")
-	private Set<Items> items;
+	private Set<Items> items=new HashSet<Items>();
 
 	public long getColorId() {
 		return colorId;

@@ -3,6 +3,7 @@ package com.wardrobe.planner.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,5 +66,15 @@ public class WardrobePlannerController {
 	public  List<Categories> listAllCategories() {
 		List<Categories> categories = categoriesService.getAllCategories();
 		return categories;
+	}
+	
+	@RequestMapping(value = "/addCategory", method = RequestMethod.POST)
+	public  void addCategory(@RequestAttribute("categories")Categories categories) {
+		categoriesService.addCategories(categories);
+	}
+	
+	@RequestMapping(value = "/addColor", method = RequestMethod.POST)
+	public  void addColor(@RequestAttribute("colors")Colors colors) {
+		colorService.addColors(colors);
 	}
 }

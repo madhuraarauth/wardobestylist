@@ -34,6 +34,8 @@ public class CategoriesDaoImpl implements CategoriesDao {
 		Categories categories = (Categories) hibernateTemplate.get(Categories.class, categoryId);
 		return categories;
 	}
+	
+	@Transactional
 	public void updateCategories(Categories categories) {
 		try {
 			hibernateTemplate.saveOrUpdate(categories);
@@ -44,6 +46,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
 		}
 	}
 
+	@Transactional
 	public Categories addCategories(Categories categories) {
 		try {
 			hibernateTemplate.save(categories);
@@ -55,6 +58,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
 		}
 	}
 
+	@Transactional
 	public void deleteCategories(long id) {
 		try {
 			hibernateTemplate.delete(getCategoryById(id));
