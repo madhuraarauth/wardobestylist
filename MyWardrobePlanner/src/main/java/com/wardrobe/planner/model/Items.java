@@ -37,7 +37,7 @@ public class Items {
 	@JoinColumn(name = "CATEGORY_ID")
 	private Categories category;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
 	@JoinTable(
 			name = "ITEMS_BY_COLLECTION", 
 			joinColumns = @JoinColumn(name = "ITEM_ID"), 
@@ -45,7 +45,7 @@ public class Items {
 	)
 	private Set<Collection> collections;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
 	@JoinTable(
 			name = "ITEMS_BY_COLOR", 
 			joinColumns = @JoinColumn(name = "ITEM_ID"), 
@@ -53,7 +53,7 @@ public class Items {
 	)
 	private Set<Colors> colors;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
 	@JoinTable(
 			name = "ITEMS_BY_MATERIAL", 
 			joinColumns = @JoinColumn(name = "ITEM_ID"), 

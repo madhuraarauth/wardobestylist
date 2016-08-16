@@ -26,7 +26,7 @@ public class Material {
 	private String materialName;
 	
 	@JsonBackReference
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "materials")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "materials")
 	private Set<Items> items;
 
 	public long getMaterialId() {

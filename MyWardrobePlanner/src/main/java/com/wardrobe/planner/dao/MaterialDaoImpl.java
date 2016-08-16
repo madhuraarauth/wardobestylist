@@ -2,6 +2,7 @@ package com.wardrobe.planner.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,12 +26,18 @@ public class MaterialDaoImpl implements MaterialDao {
 	@Transactional
 	public List<Material> getAllMaterials() {
 		List<Material> materialList = (List<Material>) hibernateTemplate.find("from Material");
+		for(Material material : materialList){
+            Hibernate.initialize(material.getItems());
+        }
 		return materialList;
 	}
 	
 	@Transactional
 	public Material getMaterialById(long materialId) {
 		Material materials = (Material) hibernateTemplate.get(Material.class, materialId);
+		if(materials != null){
+			 Hibernate.initialize(materials.getItems());
+		}
 		return materials;
 	}
 	public void updateMaterial(Material materials) {

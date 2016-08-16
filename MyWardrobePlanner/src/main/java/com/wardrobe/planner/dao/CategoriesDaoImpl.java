@@ -2,6 +2,7 @@ package com.wardrobe.planner.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,12 +27,18 @@ public class CategoriesDaoImpl implements CategoriesDao {
 	@Transactional
 	public List<Categories> getAllCategories() {
 		List<Categories> categoriesList = (List<Categories>) hibernateTemplate.find("from Categories");
+		for(Categories categories : categoriesList){
+            Hibernate.initialize(categories.getItems());
+        }
 		return categoriesList;
 	}
 
 	@Transactional
 	public Categories getCategoryById(long categoryId) {
 		Categories categories = (Categories) hibernateTemplate.get(Categories.class, categoryId);
+		if(categories != null){
+			 Hibernate.initialize(categories.getItems());
+		}
 		return categories;
 	}
 	

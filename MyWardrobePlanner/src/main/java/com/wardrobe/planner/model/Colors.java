@@ -30,8 +30,8 @@ public class Colors {
 	private String colorCode;
 	
 	@JsonBackReference
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "colors")
-	private Set<Items> items=new HashSet<Items>();
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "colors")
+	private Set<Items> items;
 
 	public long getColorId() {
 		return colorId;

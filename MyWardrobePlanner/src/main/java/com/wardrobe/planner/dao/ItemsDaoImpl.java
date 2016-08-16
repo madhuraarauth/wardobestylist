@@ -2,6 +2,7 @@ package com.wardrobe.planner.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,13 +27,25 @@ public class ItemsDaoImpl implements ItemsDao {
 	public List<Items> getAllItems() {
 		@SuppressWarnings("unchecked")
 		List<Items> itemsList = (List<Items>) hibernateTemplate.find("from Items");
+		for(Items item : itemsList){
+            Hibernate.initialize(item.getCategory());
+            Hibernate.initialize(item.getCollections());
+            Hibernate.initialize(item.getColors());
+            Hibernate.initialize(item.getMaterials());
+        }
 		return itemsList;
 	}
 	
 	@Transactional
 	public Items getItemsById(long itemId) {
-		Items items = (Items) hibernateTemplate.get(Items.class, itemId);
-		return items;
+		Items item = (Items) hibernateTemplate.get(Items.class, itemId);
+		if(item != null){
+			Hibernate.initialize(item.getCategory());
+            Hibernate.initialize(item.getCollections());
+            Hibernate.initialize(item.getColors());
+            Hibernate.initialize(item.getMaterials());
+		}
+		return item;
 	}
 	public void updateItem(Items item) {
 		try {
@@ -62,6 +75,10 @@ public class ItemsDaoImpl implements ItemsDao {
 			e.printStackTrace();
 		} finally {
 		}
+	}
+
+	public Items getMyOutfit(Items item) {
+		return null;
 	}
 
 }

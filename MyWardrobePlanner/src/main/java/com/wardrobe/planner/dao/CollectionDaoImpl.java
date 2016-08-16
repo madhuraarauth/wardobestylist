@@ -2,6 +2,7 @@ package com.wardrobe.planner.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,12 +27,18 @@ public class CollectionDaoImpl implements CollectionDao {
 	@Transactional
 	public List<Collection> getAllCollections() {
 		List<Collection> collectionList = (List<Collection>) hibernateTemplate.find("from Collection");
+		for(Collection collection : collectionList){
+            Hibernate.initialize(collection.getItems());
+        }
 		return collectionList;
 	}
 	
 	@Transactional
 	public Collection getCollectionById(long collectionId) {
 		Collection collections = (Collection) hibernateTemplate.get(Collection.class, collectionId);
+		if(collections != null){
+			 Hibernate.initialize(collections.getItems());
+		}
 		return collections;
 	}
 	public void updateCollection(Collection collections) {

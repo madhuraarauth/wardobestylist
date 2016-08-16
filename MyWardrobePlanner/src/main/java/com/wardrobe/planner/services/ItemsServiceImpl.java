@@ -36,4 +36,8 @@ public class ItemsServiceImpl implements ItemsService {
 		itemsDao.deleteItem(id);
 	}
 
+	public Items getMyOutfit(Items item) {
+		return itemsDao.getMyOutfit(item);
+	}
+
 }

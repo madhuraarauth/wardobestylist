@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,8 +74,14 @@ public class WardrobePlannerController {
 		categoriesService.addCategories(categories);
 	}
 	
-	@RequestMapping(value = "/addColor", method = RequestMethod.POST)
-	public  void addColor(@RequestAttribute("colors")Colors colors) {
+	@RequestMapping(value = "/colors", method = RequestMethod.POST)
+	public  void addColor(@RequestBody Colors colors) {
 		colorService.addColors(colors);
+	}
+	
+		@RequestMapping(value = "/getMyOutfit", method = RequestMethod.GET)
+	public  Items getMyOutfit(@RequestAttribute Items item) {
+		Items myItem = itemsService.getMyOutfit(item);
+		return myItem;
 	}
 }

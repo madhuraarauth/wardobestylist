@@ -11,4 +11,5 @@ public interface ItemsDao {
 	void updateItem(Items items);
 	Items addItem(Items items);
 	void deleteItem(long id);
+	Items getMyOutfit(Items item);
 }
