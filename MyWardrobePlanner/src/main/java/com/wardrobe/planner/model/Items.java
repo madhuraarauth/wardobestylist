@@ -1,6 +1,7 @@
 package com.wardrobe.planner.model;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,7 +20,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "ITEMS")
-public class Items {
+public class Items implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -43,7 +49,7 @@ public class Items {
 			joinColumns = @JoinColumn(name = "ITEM_ID"), 
 			inverseJoinColumns = @JoinColumn(name = "COLLECTION_ID")
 	)
-	private Set<Collection> collections;
+	private List<Collection> collections;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
 	@JoinTable(
@@ -51,7 +57,7 @@ public class Items {
 			joinColumns = @JoinColumn(name = "ITEM_ID"), 
 			inverseJoinColumns = @JoinColumn(name = "COLOR_ID")
 	)
-	private Set<Colors> colors;
+	private List<Colors> colors;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
 	@JoinTable(
@@ -59,16 +65,26 @@ public class Items {
 			joinColumns = @JoinColumn(name = "ITEM_ID"), 
 			inverseJoinColumns = @JoinColumn(name = "MATERIAL_ID")
 	)
-	private Set<Material> materials;
+	private List<Material> materials;
 
 
 	/*@ManyToMany
 	@JoinTable(name="MATERIAL")
 	@JoinColumn(name="MATERIAL_ID")
-	private Set<Material> materialSet;*/
+	private List<Material> materialSet;*/
 	
 	/*@Column(name = "IMAGE")
 	private Blob image;*/
+
+	public Items(){
+		
+	}
+	public Items(long itemId, String itemName, String itemDesc) {
+		super();
+		this.itemId = itemId;
+		this.itemName = itemName;
+		this.itemDesc = itemDesc;
+	}
 
 	public long getItemId() {
 		return itemId;
@@ -102,27 +118,27 @@ public class Items {
 		this.itemDesc = itemDesc;
 	}
 
-	public Set<Collection> getCollections() {
+	public List<Collection> getCollections() {
 		return collections;
 	}
 
-	public void setCollections(Set<Collection> collections) {
+	public void setCollections(List<Collection> collections) {
 		this.collections = collections;
 	}
 
-	public Set<Colors> getColors() {
+	public List<Colors> getColors() {
 		return colors;
 	}
 
-	public void setColors(Set<Colors> colors) {
+	public void setColors(List<Colors> colors) {
 		this.colors = colors;
 	}
 
-	public Set<Material> getMaterials() {
+	public List<Material> getMaterials() {
 		return materials;
 	}
 
-	public void setMaterials(Set<Material> materials) {
+	public void setMaterials(List<Material> materials) {
 		this.materials = materials;
 	}
 

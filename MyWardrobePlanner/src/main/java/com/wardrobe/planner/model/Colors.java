@@ -1,7 +1,7 @@
 package com.wardrobe.planner.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "COLORS")
-public class Colors {
+public class Colors implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -29,10 +34,21 @@ public class Colors {
 	@Column(name = "COLOR_CODE")
 	private String colorCode;
 	
-	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "colors")
-	private Set<Items> items;
+	@JsonIgnore
+	private List<Items> items;
 
+	public Colors(){
+		
+	}
+	
+	public Colors(long colorId, String colorName, String colorCode) {
+		super();
+		this.colorId = colorId;
+		this.colorName = colorName;
+		this.colorCode = colorCode;
+	}
+	
 	public long getColorId() {
 		return colorId;
 	}
@@ -57,13 +73,12 @@ public class Colors {
 		this.colorCode = colorCode;
 	}
 
-	public Set<Items> getItems() {
+	public List<Items> getItems() {
 		return items;
 	}
 
-	public void setItems(Set<Items> items) {
+	public void setItems(List<Items> items) {
 		this.items = items;
 	}
-	
-	
+
 }

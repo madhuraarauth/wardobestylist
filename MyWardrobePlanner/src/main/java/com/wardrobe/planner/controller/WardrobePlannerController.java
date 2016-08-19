@@ -3,6 +3,9 @@ package com.wardrobe.planner.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,15 +43,21 @@ public class WardrobePlannerController {
 	CategoriesService categoriesService;
 	
 	@RequestMapping(value = "/colors", method = RequestMethod.GET)
-	public  List<Colors> listAllUsers() {
+	public  ResponseEntity<List<Colors>> listAllUsers() {
 		List<Colors> colors = colorService.getAllColors();
-		return colors;
+		if(colors.isEmpty()){
+            return new ResponseEntity<List<Colors>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Colors>>(colors, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
-	public  List<Items> listAllItems() {
+	public  ResponseEntity<List<Items>> listAllItems() {
 		List<Items> items = itemsService.getAllItems();
-		return items;
+		if(items.isEmpty()){
+			return new ResponseEntity<List<Items>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Items>>(items,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/collections", method = RequestMethod.GET)
@@ -69,19 +78,36 @@ public class WardrobePlannerController {
 		return categories;
 	}
 	
-	@RequestMapping(value = "/addCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "/categories", method = RequestMethod.POST)
 	public  void addCategory(@RequestAttribute("categories")Categories categories) {
 		categoriesService.addCategories(categories);
 	}
 	
-	@RequestMapping(value = "/colors", method = RequestMethod.POST)
+	@RequestMapping(value = "/colors", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public  void addColor(@RequestBody Colors colors) {
 		colorService.addColors(colors);
 	}
 	
-		@RequestMapping(value = "/getMyOutfit", method = RequestMethod.GET)
+	@RequestMapping(value = "/materials", method = RequestMethod.POST)
+	public  void addMaterials(@RequestBody Material materials) {
+		materialService.addMaterial(materials);
+	}
+	
+	@RequestMapping(value = "/collections", method = RequestMethod.POST)
+	public  void addCollections(@RequestBody Collection collections) {
+		collectionService.addCollection(collections);
+	}
+	
+	@RequestMapping(value = "/items", method = RequestMethod.POST)
+	public  void addItems(@RequestBody Items items) {
+		itemsService.addItem(items);
+	}
+	
+	@RequestMapping(value = "/getMyOutfit", method = RequestMethod.GET)
 	public  Items getMyOutfit(@RequestAttribute Items item) {
 		Items myItem = itemsService.getMyOutfit(item);
 		return myItem;
 	}
+	
+	
 }
